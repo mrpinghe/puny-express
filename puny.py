@@ -10,12 +10,12 @@ import sys
 import lxml.html
 from lxml.cssselect import CSSSelector
 
+# for i in $(seq 1 100); do echo -n companyname | mimic -m $i | base64 >> domain-list.txt; done
+# cat domain-list.txt | sort | uniq > domain-list-uniq.txt
 file_path = "./domain-list-uniq.txt"
 # print socket.gethostbyname("google.com")
 puny_domains = {}
 
-# for i in $(seq 1 100); do echo -n companyname | mimic -m $i | base64 >> domain-list.txt; done
-# cat domain-list.txt | sort | uniq > domain-list-uniq.txt
 with open(file_path) as file:
 	for line in file:
 		# change base64 to unicode and then add .com
@@ -33,20 +33,16 @@ print "** Total distinct punycode domain: %d **" % len(puny_domains)
 
 for punycode, name in puny_domains.iteritems():
 	try:
-		# not validating cert when using Burp to proxy request
 		ctx = ssl.create_default_context()
-		ctx.check_hostname = False
-		ctx.verify_mode = ssl.CERT_NONE
+		# not validating cert when using Burp to proxy request
+#		ctx.check_hostname = False
+#		ctx.verify_mode = ssl.CERT_NONE
 
 		# Request 1. Get a valid csrf_token and cookie
 		url = "https://www.name.com/domain/search/thankyou-name.com"
 		headers = {
 			"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
 		}
-
-		ctx = ssl.create_default_context()
-		ctx.check_hostname = False
-		ctx.verify_mode = ssl.CERT_NONE
 
 		req = urllib2.Request(url, None, headers)
 		resp = urllib2.urlopen(req, context=ctx)
