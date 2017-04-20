@@ -1,5 +1,5 @@
 ## README
-Take a list of unicode domains that look like reputable domains, e.g. ɡooɡⅼe.com vs google.com, and check whether they are already registered punycode domains.
+Take a list of unicode domains that look like reputable domains, e.g. https://www.ɡooɡⅼe.com vs https://www.google.com, and check whether they are already registered punycode domains.
 
 A good way to generate a list would be using mimic: https://github.com/reinderien/mimic
 
