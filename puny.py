@@ -66,8 +66,7 @@ for punycode, name in puny_domains.iteritems():
 		url = "https://www.name.com/api/search/start"
 		headers.update({
 			"x-csrf-token-auth": csrf_token,
-			"Cookie": cookie,
-			"User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/57.0.2987.133 Safari/537.36"
+			"Cookie": cookie
 		})
 		data = {
 			"config": "new-dizzy-geo",
